@@ -1,0 +1,69 @@
+<div class="container bg-base p-5">
+    <div class="title mb-3">
+        <h2 class="text-center">{{ pageTitle }}</h2>
+        <hr>
+    </div>
+    <div class="body row table-responsive">
+      <ng-container *ngIf="!loading; else isLoading">
+        <table class="table table-info shadow">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="users.length > 0; else emptyData">
+                  <tr *ngFor="let user of users">
+                      <th scope="row">{{ user.id }}</th>
+                      <td>{{ user.username }}</td>
+                      <td>{{ user.fullName }}</td>
+                      <td>
+                        <a href="{{ user.email | mailto }}">
+                          {{ user.email }}
+                        </a>
+                      </td>
+                      <td>{{ user.phone }}</td>
+                      <td>
+                        <button 
+                          type="reset"
+                          appBsButton size='sm' color='outline_primary'
+                          class="text-danger float-end mx-2"
+                          (click)="onDelete(user.id)"
+                          >
+                          <i class="fas fa-trash"></i>
+                        </button>
+                        
+                        <a 
+                          appBsButton size='sm' color='outline_primary'
+                          class="text-warning float-end" 
+                          [routerLink]="['/', 'user', user.id]">
+                          <i class="fas fa-edit"></i>
+                        </a>
+
+                      </td>
+                  </tr>
+              </ng-container>
+              <ng-template #emptyData>
+                <tr>
+                  <td colspan="8" class="text-center">Belum ada data</td>
+                </tr>
+              </ng-template>
+            </tbody>
+        </table>
+        </ng-container>
+
+        <ng-template #isLoading>
+          <li class="list-group-item">
+              <span class="d-flex align-items-center">
+                  <strong>Loading....</strong>
+                  <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+              </span>
+          </li>
+        </ng-template>
+    </div>
+</div>

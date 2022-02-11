@@ -1,0 +1,234 @@
+<div class="container bg-base p-5">
+    <div class="title">
+      <h2 class="text-center">{{ pageTitle }} Create</h2>
+      <hr />
+    </div>
+    <div class="body card p-2 shadow">
+        <form [formGroup]="userFormCreate" (ngSubmit)="onSubmit()">
+            <div class="mb-3 has-validation">
+                <div class="row px-5 mb-3">
+                    <label>
+                        <h6>Username</h6>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="isFieldValid('username')"
+                        formControlName="username"
+                        placeholder="Input your username"
+                    >
+                    <div
+                        class="invalid-feedback"
+                        validation-message
+                        [control]="getControl('username')"
+                        label="username"
+                    ></div>
+                </div>
+
+                <ng-container *ngIf="!isHasId()">
+                    <div class="row px-5 mb-3">
+                        <label>
+                            <h6>Password</h6>
+                        </label>
+                        <input 
+                            type="password" 
+                            class="form-control"
+                            [ngClass]="isFieldValid('password')"
+                            formControlName="password"
+                            [readonly]="isHasId()"
+                            placeholder="Input your password"
+                        >
+                        <div
+                            class="invalid-feedback"
+                            validation-message
+                            [control]="getControl('password')"
+                            label="password"
+                        ></div>
+                    </div>
+                </ng-container>
+
+                <div class="row px-5 mb-3">
+                    <label>
+                        <h6>Full Name</h6>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="isFieldValid('fullName')"
+                        formControlName="fullName"
+                        placeholder="Input your full name"
+                    >
+                    <div
+                        class="invalid-feedback"
+                        validation-message
+                        [control]="getControl('fullName')"
+                        label="full name"
+                    ></div>
+                </div>
+
+                <div class="row px-5 mb-3">
+                    <label>
+                        <h6>Email</h6>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="isFieldValid('email')"
+                        formControlName="email"
+                        placeholder="Input your email"
+                    >
+                    <div
+                        class="invalid-feedback"
+                        validation-message
+                        [control]="getControl('email')"
+                        label="email"
+                    ></div>
+                </div>
+
+                <div class="row px-5 mb-3">
+                    <label>
+                        <h6>Phone</h6>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="isFieldValid('phone')"
+                        formControlName="phone"
+                        placeholder="Input your phone"
+                    >
+                    <div
+                        class="invalid-feedback"
+                        validation-message
+                        [control]="getControl('phone')"
+                        label="phone"
+                    ></div>
+                </div>
+
+                <div class="d-grid gap-2 px-4 py-1">
+                    <button
+                      class="btn btn-primary"
+                      type="submit"
+                      [disabled]="userFormCreate.invalid"
+                    >
+                      Submit
+                    </button>
+                    <button
+                      class="btn btn-warning"
+                      type="reset"
+                      (click)="onReset()"
+                    >
+                      Reset
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<!-- <div class="container bg-base p-5">
+    <div class="title">
+        <h2 class="text-center">{{ pageTitle }} Update</h2>
+        <hr />
+    </div>
+    <div class="body card p-2 shadow">
+        <form [formGroup]="userFormUpdate" (ngSubmit)="onSubmit()">
+            <div class="mb-3 has-validation">
+                <div class="row px-5 mb-3">
+                    <label>
+                        <h6>Username</h6>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="isFieldValid('username')"
+                        formControlName="username"
+                        placeholder="Input your username"
+                    >
+                    <div
+                        class="invalid-feedback"
+                        validation-message
+                        [control]="getControl('username')"
+                        label="username"
+                    ></div>
+                </div>
+    
+                <div class="row px-5 mb-3">
+                    <label>
+                        <h6>Full Name</h6>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="isFieldValid('fullName')"
+                        formControlName="fullName"
+                        placeholder="Input your full name"
+                    >
+                    <div
+                        class="invalid-feedback"
+                        validation-message
+                        [control]="getControl('fullName')"
+                        label="full name"
+                    ></div>
+                </div>
+    
+                <div class="row px-5 mb-3">
+                    <label>
+                        <h6>Email</h6>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="isFieldValid('email')"
+                        formControlName="email"
+                        placeholder="Input your email"
+                    >
+                    <div
+                        class="invalid-feedback"
+                        validation-message
+                        [control]="getControl('email')"
+                        label="email"
+                    ></div>
+                </div>
+    
+                <div class="row px-5 mb-3">
+                    <label>
+                        <h6>Phone</h6>
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="isFieldValid('phone')"
+                        formControlName="phone"
+                        placeholder="Input your phone"
+                    >
+                    <div
+                        class="invalid-feedback"
+                        validation-message
+                        [control]="getControl('phone')"
+                        label="phone"
+                    ></div>
+                </div>
+    
+                <div class="d-grid gap-2 px-4 py-1">
+                    <button
+                      class="btn btn-primary"
+                      type="submit"
+                      [disabled]="userFormCreate.invalid"
+                    >
+                      Submit
+                    </button>
+                    <button
+                      class="btn btn-warning"
+                      type="reset"
+                      (click)="onReset()"
+                    >
+                      Reset
+                    </button>
+                </div>
+            </div>
+    
+        </form>
+    </div>
+</div> -->
